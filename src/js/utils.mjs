@@ -7,17 +7,56 @@ export function qs(selector, parent = document) {
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  try { const data = JSON.parse(localStorage.getItem(key));
+    // Always return an array for the cart key
+    return key === 'so-cart' ? (Array.isArray(data) ? data : []) : data;
+  } catch {
+    return key === 'so-cart' ? [] : null;
+  }
 }
+ 
 // save data to local storage
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
+  const el = qs(selector);
+  if (!el) return;
+  el.addEventListener('touchend', (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener("click", callback);
+  el.addEventListener('click', callback);
+}
+
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get(param);
+  return product
+}
+
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = 'afterbegin',
+  clear = false
+) {
+  // allow selector string or element
+  const parent =
+    typeof parentElement === 'string'
+      ? document.querySelector(parentElement)
+      : parentElement;
+
+  if (!parent) return;
+  if (clear) parent.innerHTML = '';
+  if (!Array.isArray(list) || list.length === 0) {
+    parent.insertAdjacentHTML(position, '<p>No products found.</p>');
+    return;
+  }
+
+  const htmlStrings = list.map(templateFn);
+  parent.insertAdjacentHTML(position, htmlStrings.join(''));
 }
