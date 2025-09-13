@@ -1,6 +1,6 @@
 :root {
   --font-body: Arial, Helvetica, sans-serif;
-  --font-headline: Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  --font-headline: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   /* colors */
   --primary-color: #f0a868;
   --secondary-color: #525b0f;
@@ -131,6 +131,24 @@ button {
   fill: gray;
 }
 
+#cart-badge {
+  display: none;
+  position: absolute;
+  top: 10%;
+  right: -30%;
+  background: #e53935;
+  color: #fff;
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
 /* End cart icon styles */
 
 .mission {
@@ -236,9 +254,54 @@ button {
   grid-column: 3;
 }
 
+/* Cart count badge */
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #e63946; /* red badge */
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  line-height: 1;
+  padding: 3px 6px;
+  border-radius: 50%;
+  min-width: 18px;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Hidden state */
+.cart-count.hide {
+  display: none;
+}
+
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+.hide {
+  display: none !important;
+}
+
+/* make the footer align to the right under the price column */
+.cart-footer {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: flex-end;
+  /* ⬅️ push content to the right */
+}
+
+.cart-total {
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: right;
+  /* ⬅️ text itself is right-aligned */
+  min-width: 180px;
+  /* optional: keeps it tidy in a small block */
 }
 
 @media screen and (min-width: 500px) {
