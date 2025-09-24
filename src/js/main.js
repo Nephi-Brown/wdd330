@@ -1,15 +1,27 @@
-import ProductData from './ProductData.mjs';
-import ProductList from './ProductList.mjs';
-import { updateCartBadge } from './product.js';
-import { getLocalStorage } from './utils.mjs';
+import { loadHeaderFooter } from './utils.mjs';
 
-document.addEventListener('DOMContentLoaded', async () => {
-  // update the cart badge (count-based)
-  const cart = getLocalStorage('so-cart') || [];
-  updateCartBadge(cart.length);
+async function init() {
+  await loadHeaderFooter(); // wait for header/footer to load
 
-  // build and render the product list
-  const dataSource = new ProductData('tents');
-  const list = new ProductList('tents', dataSource, '.product-list');
-  await list.init();
-});
+  // Now the search button exists in the DOM
+  const searchInput = document.querySelector('#item-search');
+  const searchButton = document.querySelector('#search-button');
+
+  searchButton.addEventListener('click', () => {
+    const term = searchInput.value.trim();
+    if (term) {
+      window.location.href = `../search_results/index.html?query=${encodeURIComponent(term)}`;
+    }
+  });
+
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const term = searchInput.value.trim();
+      if (term) {
+        window.location.href = `../search_results/index.html?query=${encodeURIComponent(term)}`;
+      }
+    }
+  });
+}
+
+init();
