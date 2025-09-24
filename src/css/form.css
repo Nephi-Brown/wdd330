@@ -24,13 +24,13 @@ body {
     Roboto,
     Ubuntu,
     Cantarell,
-    'Helvetica Neue',
+    "Helvetica Neue",
     Arial,
-    'Noto Sans',
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol',
-    'Noto Color Emoji';
+    "Noto Sans",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
   line-height: 1.6;
 }
 
@@ -91,8 +91,8 @@ label {
 label > input,
 #cc-info select,
 #cc-info input,
-.purchase input[type='text'],
-input[type='number'],
+.purchase input[type="text"],
+input[type="number"],
 select {
   width: 100%;
   appearance: none;
@@ -132,11 +132,11 @@ select:required:valid {
 }
 
 /* Zip input tweaks (numbers often show spinners; hide for cleaner UI) */
-input[type='number'] {
+input[type="number"] {
   appearance: textfield;
 }
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -213,15 +213,15 @@ input[type='number']::-webkit-inner-spin-button {
   .form-sect h3,
   #cc-info,
   #submit-div,
-  input[type='hidden'] {
+  input[type="hidden"] {
     grid-column: 1 / -1;
   }
 
   /* Pair first/last names side by side naturally.
        Because your HTML repeats "First Name" & "Last Name" across
        sections, this keeps them aligned without needing extra classes. */
-  label[for='first-name'],
-  label[for='last-name'] {
+  label[for="first-name"],
+  label[for="last-name"] {
     margin: 0;
   }
 }

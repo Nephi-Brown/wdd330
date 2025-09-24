@@ -1,16 +1,16 @@
-import { getLocalStorage } from './utils.mjs';
+import { getLocalStorage } from "./utils.mjs";
 
 /* document.getElementById('cart-count').classList.add('hide'); */
 
-const totalPrice = getLocalStorage('total-price');
-const numItems = getLocalStorage('num-items');
+const totalPrice = getLocalStorage("total-price");
+const numItems = getLocalStorage("num-items");
 
-const subValue = document.getElementById('sub-value');
-const taxValue = document.getElementById('tax-value');
-const shipValue = document.getElementById('ship-value');
-const finValue = document.getElementById('fin-value');
+const subValue = document.getElementById("sub-value");
+const taxValue = document.getElementById("tax-value");
+const shipValue = document.getElementById("ship-value");
+const finValue = document.getElementById("fin-value");
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   let tax = totalPrice * 0.06;
   let ship = numItems * 2 + 8;
 
