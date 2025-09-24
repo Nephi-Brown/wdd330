@@ -60,3 +60,37 @@ export function renderListWithTemplate(
   const htmlStrings = list.map(templateFn);
   parent.insertAdjacentHTML(position, htmlStrings.join(''));
 }
+
+export function renderWithTemplate(templateFn, parentElement, callback) {
+  parentElement.innerHTML = templateFn;
+  if(callback) {
+    callback();
+  }
+}
+
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const headerElement = document.querySelector("#main-head");
+  renderWithTemplate(headerTemplate, headerElement, updateCartBadge);
+
+  const footerTemplate = await loadTemplate("../partials/footer.html");
+  const footerElement = document.querySelector("#main-foot");
+  renderWithTemplate(footerTemplate, footerElement);
+}
+
+export function updateCartBadge() {
+  const cart = getLocalStorage('so-cart') || [];
+  const badge = document.querySelector('.cart-count');
+  if (!badge) return; // Silently returns if Badge doesn't exist yet
+  // Sum all quantities in the cart array:
+  const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  badge.textContent = totalCount;
+  if (totalCount > 0) badge.classList.remove('hide');
+  else badge.classList.add('hide');
+}

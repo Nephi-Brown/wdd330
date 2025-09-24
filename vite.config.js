@@ -12,8 +12,8 @@ export default defineConfig({
         cart: resolve(__dirname, 'src/cart/index.html'),
         checkout: resolve(__dirname, 'src/checkout/index.html'),
         product: resolve(__dirname, 'src/product_pages/index.html'),
+        search_results: resolve(__dirname, 'src/search_results/index.html'),
       },
     },
   },
-  server: { host: true, port: 5173 },
 });
